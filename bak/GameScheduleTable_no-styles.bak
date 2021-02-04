@@ -1,0 +1,40 @@
+import React, { FC } from "react";
+import { setGameId, selectGameId, GameInfo } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+
+interface GameScheduleTableProps {
+  tableData: GameInfo[];
+  title: string;
+}
+
+export const GameScheduleTable: FC<GameScheduleTableProps> = ({
+  tableData,
+  title,
+}) => {
+  const dispatch = useDispatch();
+  const lastGameId = useSelector(selectGameId);
+
+  const handleRowClick = (gameId: string) => {
+    if (lastGameId !== gameId) dispatch(setGameId(gameId));
+  };
+
+  const renderRows = tableData.map((row) => (
+    <tr key={row.id} onClick={() => handleRowClick(row.id)}>
+      <td>{row.id}</td>
+      <td>{row.startTime}</td>
+    </tr>
+  ));
+
+  return (
+    <table>
+      <caption>{title}</caption>
+      <thead>
+        <tr>
+          <td>Game ID</td>
+          <td>Start Date</td>
+        </tr>
+      </thead>
+      <tbody>{renderRows}</tbody>
+    </table>
+  );
+};

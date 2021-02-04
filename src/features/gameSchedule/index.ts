@@ -1,0 +1,1 @@
+export { GameScheduleTable } from "./GameScheduleTable";

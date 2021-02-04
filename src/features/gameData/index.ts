@@ -1,0 +1,1 @@
+export { GameDataTable } from "./GameDataTable";

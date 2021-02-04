@@ -1,0 +1,29 @@
+import React, { ChangeEvent, useEffect, FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useDebounce } from "../../hooks";
+import { cleanAndValidate } from "../../utils";
+import { setGameType, selectGameType } from "../../store";
+
+export const SearchInput: FC = () => {
+  const dispatch = useDispatch();
+  const lastGameType = useSelector(selectGameType);
+  const [debouncedQuery, query, setQuery] = useDebounce<string>("", 500);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
+  useEffect(() => {
+    const cleanedValidatedQuery = cleanAndValidate(debouncedQuery);
+    if (cleanedValidatedQuery && cleanedValidatedQuery !== lastGameType)
+      dispatch(setGameType(cleanedValidatedQuery));
+    return () => {};
+  }, [debouncedQuery, lastGameType, dispatch]);
+
+  return (
+    <div>
+      <div>SearchInput</div>
+      <input type="text" value={query} onChange={handleInputChange} />
+    </div>
+  );
+};
