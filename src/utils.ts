@@ -9,10 +9,6 @@ export function cleanAndValidate(string: string): string {
   }
 }
 
-export function isEmptyObject(obj: object): boolean {
-  return JSON.stringify(obj) === "{}";
-}
-
 interface ParsedDate {
   day: string;
   month: string;

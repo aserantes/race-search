@@ -11,6 +11,7 @@ _A horse race search app. Tech Challenge for ATG._
 - Redux (redux-tookit)
 - Material UI
 - API fetch
+- E2E test (jest/Testing-library)
 
 ### Data Sources
 

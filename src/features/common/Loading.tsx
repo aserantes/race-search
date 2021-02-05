@@ -17,7 +17,7 @@ export const Loading: FC = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-testid="Loading-component">
       <LinearProgress color="secondary" />
     </div>
   );

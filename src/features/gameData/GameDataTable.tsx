@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       margin: 0,
-      "&$expanded": {
-        margin: 0,
-      },
     },
     raceTitle: {
       backgroundColor: "rgba(255,127,0,0.10)",
@@ -56,7 +53,7 @@ export const GameDataTable: FC<GameDataTableProps> = ({ tableData }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.wrapper} data-testid="GameDataTable-component">
       {tableData.races.map((race) => {
         const { name, number, id, scheduledStartTime, starts } = race;
         const { hours, minutes } = parseDate(scheduledStartTime);
@@ -74,18 +71,23 @@ export const GameDataTable: FC<GameDataTableProps> = ({ tableData }) => {
               </Box>
             </Paper>
             {starts.map((start) => {
-              const { number, horse, driver } = start;
               const {
-                firstName: driverFirstName,
-                lastName: driverLastName,
-              } = driver;
-              const { name: horseName, trainer, pedigree } = horse;
-              const {
-                firstName: trainerFirstName,
-                lastName: trainerLastName,
-              } = trainer;
-              const { father } = pedigree;
-              const { name: horseFather } = father;
+                number,
+                horse: {
+                  name: horseName,
+                  trainer: {
+                    firstName: trainerFirstName,
+                    lastName: trainerLastName,
+                  },
+                  pedigree: {
+                    father: { name: horseFather },
+                  },
+                },
+                driver: {
+                  firstName: driverFirstName,
+                  lastName: driverLastName,
+                },
+              } = start;
               return (
                 <Accordion key={start.number}>
                   <AccordionSummary

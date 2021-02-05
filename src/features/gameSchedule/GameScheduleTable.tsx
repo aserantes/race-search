@@ -54,6 +54,7 @@ export const GameScheduleTable: FC<GameScheduleTableProps> = ({
     const { day, month, hours, minutes } = parseDate(row.startTime);
     return (
       <ToggleButton
+        data-testid="GameScheduleTable-game"
         key={row.id}
         value={row.id}
         aria-label={`${title} ${lastGameId}: ${row.startTime}`}
@@ -72,6 +73,7 @@ export const GameScheduleTable: FC<GameScheduleTableProps> = ({
           className={`${classes.gameType} ${classes.shadow}`}
           variant="h5"
           color="secondary"
+          data-testid="GameSchedule-gameType"
         >
           {gameType}
         </Typography>
