@@ -15,7 +15,7 @@ _A horse race search app. Tech Challenge for ATG._
 
 ### Data Sources
 
-- Mock credit card data is hardcoded for now.
+- ATG's API services
 
 ### Instructions
 
